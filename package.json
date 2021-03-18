@@ -9,6 +9,7 @@
     "coc.nvim",
     "php",
     "blade-formatter",
+    "blade",
     "laravel",
     "vim",
     "neovim"
