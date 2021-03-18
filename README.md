@@ -4,12 +4,6 @@
 
 ## Install
 
-**CocInstall**:
-
-> TODO
-
-`:CocInstall @yaegassy/coc-blade-formatter`
-
 **vim-plug**:
 
 ```vim
