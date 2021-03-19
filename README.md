@@ -20,7 +20,7 @@ Set up `autocmd BufNewFile,BufRead *.blade.php set filetype=blade` in `.vimrc/in
 
 ### oniguruma rebuild
 
-`blade-formatter` depends on `vscode-oniguruma`. The `:CocInstall/:CocUpdate` will not build `oniguruma`.
+`blade-formatter` depends on `vscode-oniguruma`.
 
 You will be prompted to build `oniguruma` when you installed it for the first time or when you updated it.
 
