@@ -40,8 +40,8 @@ export async function doFormat(
 
   let binPath = extensionConfig.get('path', '');
   if (!binPath) {
-    if (fs.existsSync(context.asAbsolutePath('node_modules/.bin/blade-formatter'))) {
-      binPath = context.asAbsolutePath('node_modules/.bin/blade-formatter');
+    if (fs.existsSync(context.asAbsolutePath('node_modules/blade-formatter/bin/blade-formatter'))) {
+      binPath = context.asAbsolutePath('node_modules/blade-formatter/bin/blade-formatter');
     } else {
       window.showErrorMessage('Unable to find the blade-formatter.');
       return text;
@@ -72,11 +72,11 @@ export async function doFormat(
   const tmpFile = tmp.fileSync();
   fs.writeFileSync(tmpFile.name, text);
 
-  outputChannel.appendLine(`Run: ${binPath} ${args.join(' ')} ${tmpFile.name}\n`);
+  outputChannel.appendLine(`Run: node ${binPath} ${args.join(' ')} ${tmpFile.name}\n`);
   outputChannel.appendLine(`Cwd: ${opts.cwd}\n`);
 
   return new Promise(function (resolve) {
-    cp.execFile(binPath, [...args, tmpFile.name], opts, function (error, stdout, stderr) {
+    cp.execFile('node', [binPath, ...args, tmpFile.name], opts, function (error, stdout, stderr) {
       if (error) {
         tmpFile.removeCallback();
 
@@ -87,7 +87,7 @@ export async function doFormat(
         }
 
         window.showErrorMessage('There was an error while running blade-formatter.');
-        outputChannel.appendLine('Error: There was an error while running blade-formatter.\n');
+        outputChannel.appendLine(`Error: ${error.message}\n`);
         return;
       }
 
