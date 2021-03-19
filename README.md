@@ -4,6 +4,12 @@
 
 ## Install
 
+**CocInstall**:
+
+```
+:CocInstall coc-blade-formatter
+```
+
 **vim-plug**:
 
 ```vim
