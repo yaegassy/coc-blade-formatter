@@ -12,15 +12,24 @@ Plug 'yaegassy/coc-blade-formatter', {'do': 'yarn install --frozen-lockfile'}
 
 ## Note
 
+### Filetype related
+
 The "filetype" must be `blade` for this extension to work.
 
 Set up `autocmd BufNewFile,BufRead *.blade.php set filetype=blade` in `.vimrc/init.vim`, Or install "blade" related plugin (e.g. [jwalton512/vim-blade](https://github.com/jwalton512/vim-blade) or [sheerun/vim-polyglot](https://github.com/sheerun/vim-polyglot)).
 
+### oniguruma rebuild
+
+`blade-formatter` depends on `vscode-oniguruma`. The `:CocInstall/:CocUpdate` will not build `oniguruma`.
+
+You will be prompted to build `oniguruma` when you installed it for the first time or when you updated it.
+
+You can also build it manually at `:CocCommand bladeFormatter.rebuild`.
+
 ## Usage
 
-- `<Plug>(coc-format)`. help: `:h coc-format`
-- Or `:call CocAction('format')`
-- Or `:CocCommand bladeFormatter.run`
+- `:call CocAction('format')`
+- `:CocCommand bladeFormatter.run`
 
 ## Configuration options
 
@@ -33,6 +42,7 @@ Set up `autocmd BufNewFile,BufRead *.blade.php set filetype=blade` in `.vimrc/in
 ## Commands
 
 - `bladeFormatter.run`: Run bladeFormatter.run
+- `bladeFormatter.rebuild`: Run bladeFormatter.rebuild
 
 ## Ignoring Files: .bladeignore
 
