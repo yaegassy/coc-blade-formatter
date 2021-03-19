@@ -43,10 +43,14 @@ To exclude files from formatting, create `.bladeignore` file in the root of your
 resources/views/email/**
 ```
 
-## Similar coc.nvim extensions
+## Similar coc.nvim extensions and vim plugins
+
+blade-formatter is also supported.
 
 - [coc-diagnostic](https://github.com/iamcco/coc-diagnostic)
-  - blade-formatter is also supported. [DEMO](https://github.com/iamcco/coc-diagnostic/pull/47)
+  - [DEMO](https://github.com/iamcco/coc-diagnostic/pull/47)
+- [efm-langserver](https://github.com/mattn/efm-langserver)
+  - [DEMO](https://github.com/mattn/efm-langserver/pull/61)
 
 ## Thanks
 
