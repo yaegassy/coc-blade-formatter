@@ -25,11 +25,11 @@ function disposeHandlers(): void {
 }
 
 export async function activate(context: ExtensionContext): Promise<void> {
-  const outputChannel = window.createOutputChannel('bladeFormatter');
-
   const extensionConfig = workspace.getConfiguration('bladeFormatter');
   const isEnable = extensionConfig.get<boolean>('enable', true);
   if (!isEnable) return;
+
+  const outputChannel = window.createOutputChannel('bladeFormatter');
 
   const isVscodeOnigurumaDir = path.join(
     context.extensionPath,
