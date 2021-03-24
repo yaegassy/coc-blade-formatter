@@ -28,7 +28,9 @@ Set up `autocmd BufNewFile,BufRead *.blade.php set filetype=blade` in `.vimrc/in
 
 `blade-formatter` depends on `vscode-oniguruma`.
 
-You will be prompted to build `oniguruma` when you installed it for the first time or when you updated it.
+When you **install** coc-blade-formatter for the first time or **update** it, A "prompt" is displayed to rebuild oniguruma.
+
+To install or rebuild blade-formatter (depends oniguruma), you may need to install [node-gyp](https://github.com/nodejs/node-gyp) or OS build tools (e.g. windows-build-tools for Windows) depending on your environment.
 
 You can also build it manually at `:CocCommand bladeFormatter.rebuild`.
 
