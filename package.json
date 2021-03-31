@@ -106,6 +106,6 @@
     ]
   },
   "dependencies": {
-    "blade-formatter": "^1.10.5"
+    "blade-formatter": "^1.10.6"
   }
 }
