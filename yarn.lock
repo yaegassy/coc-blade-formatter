@@ -253,10 +253,10 @@ balanced-match@^1.0.0:
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
   integrity sha1-ibTRmasr7kneFk6gK4nORi1xt2c=
 
-blade-formatter@^1.11.1:
-  version "1.11.1"
-  resolved "https://registry.yarnpkg.com/blade-formatter/-/blade-formatter-1.11.1.tgz#b28270a2f9812ee60e1690ec0d2ae89630b7dda6"
-  integrity sha512-9RlKPAcfIOVZrzJVTbiQyXnD6wBX21LzspYeI7aQ8LKu+tMeZDXrlakz3sSugQ2VQRjzcDPuWpDUHW+BKJOloA==
+blade-formatter@^1.11.2:
+  version "1.11.2"
+  resolved "https://registry.yarnpkg.com/blade-formatter/-/blade-formatter-1.11.2.tgz#5927bcab0a9b6719bc8a811287d0594297ee34e1"
+  integrity sha512-r39CQic+yMyz23J6fWpDF416ZDhEbqw+W/97E6gAcPiVfeJ99bRDuOo6BwQSom8P2huiz2CB4Hx0+qmgROKiNg==
   dependencies:
     "@prettier/plugin-php" shufo/plugin-php#a18627e03748ee5dd0218b7685a6564672f6c3e7
     aigle "^1.14.1"
