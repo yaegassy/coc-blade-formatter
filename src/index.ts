@@ -31,17 +31,17 @@ export async function activate(context: ExtensionContext): Promise<void> {
 
   const outputChannel = window.createOutputChannel('bladeFormatter');
 
-  // const isVscodeOnigurumaDir = path.join(
-  //   context.extensionPath,
-  //   'node_modules',
-  //   'blade-formatter',
-  //   'node_modules',
-  //   'vscode-oniguruma'
-  // );
-  //
-  // if (!fs.existsSync(isVscodeOnigurumaDir)) {
-  //   await rebuildWrapper(context);
-  // }
+  const isVscodeOnigurumaDir = path.join(
+    context.extensionPath,
+    'node_modules',
+    'blade-formatter',
+    'node_modules',
+    'vscode-oniguruma'
+  );
+
+  if (!fs.existsSync(isVscodeOnigurumaDir)) {
+    await rebuildWrapper(context);
+  }
 
   const editProvider = new BladeFormattingEditProvider(context, outputChannel);
   const priority = 1;
