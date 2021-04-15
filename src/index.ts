@@ -79,17 +79,32 @@ async function rebuildWrapper(context: ExtensionContext) {
   let ret = 0;
   ret = await window.showQuickpick(['Yes', 'Cancel'], msg);
   if (ret === 0) {
+    let isFinished = false;
     try {
-      setTimeout(() => {
-        window.showWarningMessage('blade-formatter | oniguruma build start...');
-      }, 500);
+      // ---- timer ----
+      const start = new Date();
+      let lap: Date;
+
+      const timerId = setInterval(() => {
+        lap = new Date();
+        window.showWarningMessage(
+          `blade-formatter | oniguruma build... (${Math.floor((lap.getTime() - start.getTime()) / 1000)} sec)`
+        );
+        if (isFinished) {
+          const stop = new Date();
+          // Complete message
+          window.showWarningMessage(`${msg} (${Math.floor((stop.getTime() - start.getTime()) / 1000)} sec)`);
+          clearInterval(timerId);
+        }
+      }, 2000);
 
       msg = await rebuild(context);
-      window.showWarningMessage(msg);
+      isFinished = true;
+      // ---- /timer ----
     } catch (e) {
-      console.error(e);
       msg = 'Install blade-formatter failed, you can get it from https://www.npmjs.com/package/blade-formatter';
-      window.showMessage(msg, 'error');
+      // Timer finished flag on the catch side.
+      isFinished = true;
       return;
     }
   } else {
