@@ -39,8 +39,11 @@ export async function activate(context: ExtensionContext): Promise<void> {
     'vscode-oniguruma'
   );
 
-  if (!fs.existsSync(isVscodeOnigurumaDir)) {
-    await rebuildWrapper(context);
+  const binPath = extensionConfig.get('path', '');
+  if (!binPath) {
+    if (!fs.existsSync(isVscodeOnigurumaDir)) {
+      await rebuildWrapper(context);
+    }
   }
 
   const editProvider = new BladeFormattingEditProvider(context, outputChannel);
