@@ -70,6 +70,10 @@ blade-formatter is also supported.
 - [efm-langserver](https://github.com/mattn/efm-langserver)
   - [DEMO](https://github.com/mattn/efm-langserver/pull/61)
 
+## Related coc.nvim extension
+
+- [yaegassy/coc-blade-linter](https://github.com/yaegassy/coc-blade-linter)
+
 ## Thanks
 
 - <https://github.com/shufo/blade-formatter>
