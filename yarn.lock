@@ -73,7 +73,7 @@
   dependencies:
     linguist-languages "^7.5.1"
     mem "^8.0.0"
-    php-parser shufo/php-parser#0b7781fdf88be4b8974320cf27af1588c07e2da8
+    php-parser czosel/php-parser#b55446b48a4a588e8b62c7f9085ce0e7cb3b70fa
 
 "@types/json-schema@^7.0.3":
   version "7.0.7"
@@ -253,10 +253,10 @@ balanced-match@^1.0.0:
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.2.tgz#e83e3a7e3f300b34cb9d87f615fa0cbf357690ee"
   integrity sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==
 
-blade-formatter@^1.11.6:
-  version "1.11.6"
-  resolved "https://registry.yarnpkg.com/blade-formatter/-/blade-formatter-1.11.6.tgz#2ee724c3d8eb5d865258c5d0d4303575120e3d5a"
-  integrity sha512-N00KagtvYZLSDzHoeAzU5q6PqyyWOlYStmGv82fS6NIV1Ob+9BFpBWJ4pNTmtMqUgEE14EoT9QkxBSQEb1jnmw==
+blade-formatter@^1.11.7:
+  version "1.11.7"
+  resolved "https://registry.yarnpkg.com/blade-formatter/-/blade-formatter-1.11.7.tgz#996c7886ea98a0436915791e5ae17a3ee624b87a"
+  integrity sha512-i4GD49qLipSZ4nPYAxWYi4zJs3tFPLJSveczgXL4U8MnErUI0eyZhWTdGKLHbJJatLOp9DymnYwXr53VfR0h5w==
   dependencies:
     "@prettier/plugin-php" shufo/plugin-php#a18627e03748ee5dd0218b7685a6564672f6c3e7
     aigle "^1.14.1"
@@ -270,8 +270,8 @@ blade-formatter@^1.11.6:
     lodash "^4.17.19"
     php-parser shufo/php-parser#0b7781fdf88be4b8974320cf27af1588c07e2da8
     prettier "^2.2.0"
-    vscode-oniguruma "1.3.1"
-    vscode-textmate "^4.2.2"
+    vscode-oniguruma "1.5.1"
+    vscode-textmate "^5.4.0"
     xregexp "^5.0.1"
     yargs "^16.2.0"
 
@@ -978,11 +978,6 @@ ms@2.1.2:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
   integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
 
-nan@^2.14.0:
-  version "2.14.2"
-  resolved "https://registry.yarnpkg.com/nan/-/nan-2.14.2.tgz#f5376400695168f4cc694ac9393d0c9585eeea19"
-  integrity sha512-M2ufzIiINKCuDfBSAUr1vWQ+vuVcA9kqx8JJUsbQi6yf1uGRyb7HfpdfUr5qLXf3B/t8dPvcjhKMmlfnP47EzQ==
-
 natural-compare@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
@@ -1001,13 +996,6 @@ once@^1.3.0:
   integrity sha1-WDsap3WWHUsROsF9nFC6753Xa9E=
   dependencies:
     wrappy "1"
-
-oniguruma@^7.2.0:
-  version "7.2.1"
-  resolved "https://registry.yarnpkg.com/oniguruma/-/oniguruma-7.2.1.tgz#51775834f7819b6e31aa878706aa7f65ad16b07f"
-  integrity sha512-WPS/e1uzhswPtJSe+Zls/kAj27+lEqZjCmRSjnYk/Z4L2Mu+lJC2JWtkZhPJe4kZeTQfz7ClcLyXlI4J68MG2w==
-  dependencies:
-    nan "^2.14.0"
 
 optionator@^0.9.1:
   version "0.9.1"
@@ -1344,17 +1332,15 @@ v8-compile-cache@^2.0.3:
   resolved "https://registry.yarnpkg.com/v8-compile-cache/-/v8-compile-cache-2.3.0.tgz#2de19618c66dc247dcfb6f99338035d8245a2cee"
   integrity sha512-l8lCEmLcLYZh4nbunNZvQCJc5pv7+RCwa8q/LdUx8u7lsWvPDKmpodJAJNwkAhJC//dFY48KuIEmjtd4RViDrA==
 
-vscode-oniguruma@1.3.1:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/vscode-oniguruma/-/vscode-oniguruma-1.3.1.tgz#e2383879c3485b19f533ec34efea9d7a2b14be8f"
-  integrity sha512-gz6ZBofA7UXafVA+m2Yt2zHKgXC2qedArprIsHAPKByTkwq9l5y/izAGckqxYml7mSbYxTRTfdRwsFq3cwF4LQ==
+vscode-oniguruma@1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/vscode-oniguruma/-/vscode-oniguruma-1.5.1.tgz#9ca10cd3ada128bd6380344ea28844243d11f695"
+  integrity sha512-JrBZH8DCC262TEYcYdeyZusiETu0Vli0xFgdRwNJjDcObcRjbmJP+IFcA3ScBwIXwgFHYKbAgfxtM/Cl+3Spjw==
 
-vscode-textmate@^4.2.2:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/vscode-textmate/-/vscode-textmate-4.4.0.tgz#14032afeb50152e8f53258c95643e555f2948305"
-  integrity sha512-dFpm2eK0HwEjeFSD1DDh3j0q47bDSVuZt20RiJWxGqjtm73Wu2jip3C2KaZI3dQx/fSeeXCr/uEN4LNaNj7Ytw==
-  dependencies:
-    oniguruma "^7.2.0"
+vscode-textmate@^5.4.0:
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/vscode-textmate/-/vscode-textmate-5.4.0.tgz#4b25ffc1f14ac3a90faf9a388c67a01d24257cd7"
+  integrity sha512-c0Q4zYZkcLizeYJ3hNyaVUM2AA8KDhNCA3JvXY8CeZSJuBdAy3bAvSbv46RClC4P3dSO9BdwhnKEx2zOo6vP/w==
 
 which@^2.0.1:
   version "2.0.2"
