@@ -24,16 +24,6 @@ The "filetype" must be `blade` for this extension to work.
 
 Set up `autocmd BufNewFile,BufRead *.blade.php set filetype=blade` in `.vimrc/init.vim`, Or install "blade" related plugin (e.g. [jwalton512/vim-blade](https://github.com/jwalton512/vim-blade) or [sheerun/vim-polyglot](https://github.com/sheerun/vim-polyglot)).
 
-### oniguruma rebuild
-
-`blade-formatter` depends on `vscode-textmate`, `vscode-oniguruma`.
-
-When you **install** coc-blade-formatter for the first time or **update** it, A "prompt" is displayed to rebuild oniguruma.
-
-To install or rebuild blade-formatter (depends oniguruma), you may need to install [node-gyp](https://github.com/nodejs/node-gyp) or OS build tools (e.g. windows-build-tools for Windows) depending on your environment.
-
-You can also build it manually at `:CocCommand bladeFormatter.rebuild`.
-
 ## Usage
 
 - `:call CocAction('format')`
@@ -50,7 +40,6 @@ You can also build it manually at `:CocCommand bladeFormatter.rebuild`.
 ## Commands
 
 - `bladeFormatter.run`: Run bladeFormatter.run
-- `bladeFormatter.rebuild`: Run bladeFormatter.rebuild
 
 ## Ignoring Files: .bladeignore
 

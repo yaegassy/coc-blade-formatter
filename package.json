@@ -22,7 +22,6 @@
     "url": "https://github.com/yaegassy/coc-blade-formatter"
   },
   "scripts": {
-    "oniguruma:rebuild": "cd node_modules/blade-formatter && npm install --no-package-lock",
     "lint": "eslint src --ext ts",
     "clean": "rimraf lib",
     "watch": "node esbuild.js --watch",
@@ -98,10 +97,6 @@
       {
         "command": "bladeFormatter.run",
         "title": "Run bladeFormatter.run"
-      },
-      {
-        "command": "bladeFormatter.rebuild",
-        "title": "Run bladeFormatter.rebuild"
       }
     ]
   },
