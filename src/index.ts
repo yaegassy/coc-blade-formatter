@@ -9,11 +9,7 @@ import {
   window,
 } from 'coc.nvim';
 
-import path from 'path';
-import fs from 'fs';
-
 import BladeFormattingEditProvider, { doFormat, fullDocumentRange } from './format';
-import { rebuild } from './installer';
 
 let formatterHandler: undefined | Disposable;
 
@@ -30,21 +26,6 @@ export async function activate(context: ExtensionContext): Promise<void> {
   if (!isEnable) return;
 
   const outputChannel = window.createOutputChannel('bladeFormatter');
-
-  const isVscodeOnigurumaDir = path.join(
-    context.extensionPath,
-    'node_modules',
-    'blade-formatter',
-    'node_modules',
-    'vscode-oniguruma'
-  );
-
-  const binPath = extensionConfig.get('path', '');
-  if (!binPath) {
-    if (!fs.existsSync(isVscodeOnigurumaDir)) {
-      await rebuildWrapper(context);
-    }
-  }
 
   const editProvider = new BladeFormattingEditProvider(context, outputChannel);
   const priority = 1;
@@ -68,49 +49,4 @@ export async function activate(context: ExtensionContext): Promise<void> {
       }
     })
   );
-
-  context.subscriptions.push(
-    commands.registerCommand('bladeFormatter.rebuild', async () => {
-      await rebuildWrapper(context);
-    })
-  );
-}
-
-async function rebuildWrapper(context: ExtensionContext) {
-  let msg = '[blade-formatter] Run a build/rebuild of oniguruma?';
-
-  let ret = 0;
-  ret = await window.showQuickpick(['Yes', 'Cancel'], msg);
-  if (ret === 0) {
-    let isFinished = false;
-    try {
-      // ---- timer ----
-      const start = new Date();
-      let lap: Date;
-
-      const timerId = setInterval(() => {
-        lap = new Date();
-        window.showWarningMessage(
-          `blade-formatter | oniguruma build... (${Math.floor((lap.getTime() - start.getTime()) / 1000)} sec)`
-        );
-        if (isFinished) {
-          const stop = new Date();
-          // Complete message
-          window.showWarningMessage(`${msg} (${Math.floor((stop.getTime() - start.getTime()) / 1000)} sec)`);
-          clearInterval(timerId);
-        }
-      }, 2000);
-
-      msg = await rebuild(context);
-      isFinished = true;
-      // ---- /timer ----
-    } catch (e) {
-      msg = 'Install blade-formatter failed, you can get it from https://www.npmjs.com/package/blade-formatter';
-      // Timer finished flag on the catch side.
-      isFinished = true;
-      return;
-    }
-  } else {
-    return;
-  }
 }
