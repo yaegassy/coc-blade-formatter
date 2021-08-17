@@ -1,6 +1,6 @@
 {
   "name": "coc-blade-formatter",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "blade-formatter (Laravel Blade formatter) extension for coc.nvim",
   "author": "yaegassy <yosstools@gmail.com>",
   "license": "MIT",
@@ -101,6 +101,6 @@
     ]
   },
   "dependencies": {
-    "blade-formatter": "^1.12.0"
+    "blade-formatter": "^1.12.1"
   }
 }
