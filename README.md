@@ -50,19 +50,6 @@ To exclude files from formatting, create `.bladeignore` file in the root of your
 resources/views/email/**
 ```
 
-## Similar coc.nvim extensions and vim plugins
-
-blade-formatter is also supported.
-
-- [coc-diagnostic](https://github.com/iamcco/coc-diagnostic)
-  - [DEMO](https://github.com/iamcco/coc-diagnostic/pull/47)
-- [efm-langserver](https://github.com/mattn/efm-langserver)
-  - [DEMO](https://github.com/mattn/efm-langserver/pull/61)
-
-## Related coc.nvim extension
-
-- [yaegassy/coc-blade-linter](https://github.com/yaegassy/coc-blade-linter)
-
 ## Thanks
 
 - <https://github.com/shufo/blade-formatter>
