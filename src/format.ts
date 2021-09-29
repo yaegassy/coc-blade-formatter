@@ -13,7 +13,6 @@ import {
 import cp from 'child_process';
 import fs from 'fs';
 import path from 'path';
-import tmp from 'tmp';
 import ignore from 'ignore';
 
 export async function doFormat(
@@ -22,14 +21,12 @@ export async function doFormat(
   document: TextDocument,
   range?: Range
 ): Promise<string> {
-  outputChannel.appendLine(`${'#'.repeat(10)} blade-formatter\n`);
-
   const fileName = Uri.parse(document.uri).fsPath;
-  const text = document.getText(range);
+  const originalText = document.getText(range);
 
   if (document.languageId !== 'blade') {
-    window.showErrorMessage('bladeFormatter.run cannot run, not a blade file');
-    return text;
+    window.showErrorMessage('blade-formatter cannot run, not a blade file');
+    return originalText;
   }
 
   const extensionConfig = workspace.getConfiguration('bladeFormatter');
@@ -44,65 +41,66 @@ export async function doFormat(
       binPath = context.asAbsolutePath('node_modules/blade-formatter/bin/blade-formatter');
     } else {
       window.showErrorMessage('Unable to find the blade-formatter.');
-      return text;
+      return originalText;
     }
   } else {
     if (!fs.existsSync(binPath)) {
       window.showErrorMessage('Unable to find the blade-formatter (user setting).');
-      return text;
+      return originalText;
     }
-  }
-
-  const isIgnoreFile = shouldIgnore(fileName, outputChannel);
-  if (isIgnoreFile) {
-    window.showWarningMessage('.bladeignore matched file.');
-    return text;
   }
 
   const args: string[] = [];
   const cwd = Uri.file(workspace.root).fsPath;
-
-  // Use shell
   const opts = { cwd, shell: true };
 
   args.push(`--indent-size ${formatIndentSize}`);
   args.push(`--wrap-line-length ${formatWrapLineLength}`);
   args.push(`--wrap-attributes ${formatWrapAttributes}`);
 
-  const tmpFile = tmp.fileSync();
-  fs.writeFileSync(tmpFile.name, text);
+  args.push('--stdin');
 
-  outputChannel.appendLine(`Run: node ${binPath} ${args.join(' ')} ${tmpFile.name}\n`);
-  outputChannel.appendLine(`Cwd: ${opts.cwd}\n`);
+  // ---- Output the command to be executed to channel log. ----
+  outputChannel.appendLine(`${'#'.repeat(10)} blade-formatter\n`);
+  outputChannel.appendLine(`Cwd: ${opts.cwd}`);
+  outputChannel.appendLine(`File: ${fileName}`);
+  outputChannel.appendLine(`Run: ${binPath} ${args.join(' ')}`);
 
-  return new Promise(function (resolve) {
-    cp.execFile('node', [binPath, ...args, tmpFile.name], opts, function (error, stdout, stderr) {
-      if (error) {
-        tmpFile.removeCallback();
+  const isIgnoreFile = shouldIgnore(fileName, outputChannel);
+  if (isIgnoreFile) {
+    window.showWarningMessage('.bladeignore matched file.');
+    return originalText;
+  }
 
-        if (error.code === 'ENOENT') {
-          window.showErrorMessage('Unable to find the blade-formatter tool.');
-          outputChannel.appendLine('Error: Unable to find the blade-formatter tool.\n');
-          return;
-        }
+  return new Promise((resolve) => {
+    const cps = cp.spawn(binPath, args, opts);
 
-        window.showErrorMessage('There was an error while running blade-formatter.');
-        outputChannel.appendLine(`Error: ${error.message}\n`);
-        return;
-      }
-
-      if (stderr) {
-        outputChannel.appendLine('STDERR: Restore the original text.\n');
-        const tmpText = fs.readFileSync(tmpFile.name, 'utf-8');
-        tmpFile.removeCallback();
-        return resolve(tmpText);
-      }
-
-      outputChannel.appendLine('STDOUT: Success.\n');
-      const newText = stdout;
-      tmpFile.removeCallback();
-      resolve(newText);
+    cps.on('error', (err: Error) => {
+      outputChannel.appendLine(`\n==== ERROR ===\n`);
+      outputChannel.appendLine(`${err}`);
+      return;
     });
+
+    if (cps.pid) {
+      cps.stdin.write(originalText);
+      cps.stdin.end();
+
+      cps.stderr.on('data', (data: Buffer) => {
+        outputChannel.appendLine(`\n==== STDERR ===\n`);
+        outputChannel.appendLine(`${data}`);
+
+        // rollback
+        resolve(originalText);
+      });
+
+      cps.stdout.on('data', (data: Buffer) => {
+        outputChannel.appendLine(`\n==== STDOUT ===\n`);
+        outputChannel.appendLine(`${data}`);
+
+        // auto-fixed
+        resolve(data.toString());
+      });
+    }
   });
 }
 
@@ -146,7 +144,7 @@ function shouldIgnore(filepath: string, outputChannel: OutputChannel): boolean {
     const ig = ignore().add(ignoreFileContent);
 
     try {
-      outputChannel.appendLine(`IGNORE: matched ${filepath}`);
+      outputChannel.appendLine(`IGNORE: matched ${filepath}\n`);
       return ig.ignores(path.relative(workspaceRootDir, filepath));
     } catch (err) {
       return false;
