@@ -53,6 +53,15 @@
     "onLanguage:blade"
   ],
   "contributes": {
+    "rootPatterns": [
+      {
+        "filetype": "blade",
+        "patterns": [
+          ".bladeignore",
+          "composer.json"
+        ]
+      }
+    ],
     "configuration": {
       "type": "object",
       "title": "coc-blade-formatter configuration",
