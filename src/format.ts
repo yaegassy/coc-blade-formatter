@@ -144,8 +144,9 @@ function shouldIgnore(filepath: string, outputChannel: OutputChannel): boolean {
     const ig = ignore().add(ignoreFileContent);
 
     try {
-      outputChannel.appendLine(`IGNORE: matched ${filepath}\n`);
-      return ig.ignores(path.relative(workspaceRootDir, filepath));
+      const isMatch = ig.ignores(path.relative(workspaceRootDir, filepath));
+      if (isMatch) outputChannel.appendLine(`IGNORE: matched ${filepath}\n`);
+      return isMatch;
     } catch (err) {
       return false;
     }
