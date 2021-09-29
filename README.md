@@ -2,6 +2,8 @@
 
 [blade-formatter](https://github.com/shufo/blade-formatter) (Laravel Blade formatter) extension for [coc.nvim](https://github.com/neoclide/coc.nvim)
 
+<img width="780" alt="coc-blade-formatter-demo" src="https://user-images.githubusercontent.com/188642/135217274-6157aab4-44c8-4c1f-9383-050724e6691f.gif">
+
 ## Install
 
 **CocInstall**:
