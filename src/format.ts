@@ -90,6 +90,7 @@ export async function doFormat(
         outputChannel.appendLine(`${data}`);
 
         // rollback
+        window.showWarningMessage(`Formatting failed due to an error in the template.`);
         resolve(originalText);
       });
 
@@ -97,8 +98,17 @@ export async function doFormat(
         outputChannel.appendLine(`\n==== STDOUT ===\n`);
         outputChannel.appendLine(`${data}`);
 
-        // auto-fixed
-        resolve(data.toString());
+        const isSuccess = isSuccessFormat(data.toString());
+        outputChannel.appendLine(`== success ==: ${isSuccess}\n`);
+
+        if (isSuccess) {
+          // auto-fixed
+          resolve(data.toString());
+        } else {
+          // rollback
+          window.showWarningMessage(`Formatting failed due to an error in the template.`);
+          resolve(originalText);
+        }
       });
     }
   });
@@ -153,6 +163,21 @@ function shouldIgnore(filepath: string, outputChannel: OutputChannel): boolean {
   }
 
   return false;
+}
+
+function isSuccessFormat(s: string) {
+  let flag = true;
+  const lines = s.split('\n');
+  const p = /^SyntaxError:\s.*$/;
+
+  for (const v of lines) {
+    const m = v.match(p);
+    if (m) {
+      flag = false;
+    }
+  }
+
+  return flag;
 }
 
 export default BladeFormattingEditProvider;
