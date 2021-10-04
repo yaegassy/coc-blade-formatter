@@ -6,7 +6,6 @@
   "license": "MIT",
   "main": "lib/index.js",
   "keywords": [
-    "coc.nvim",
     "php",
     "blade-formatter",
     "blade",
