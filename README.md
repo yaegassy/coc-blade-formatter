@@ -1,4 +1,10 @@
-# coc-blade-formatter
+# [Archived] coc-blade-formatter
+
+## WARNING
+
+This project is no longer maintained. Please switch to its successor, [coc-blade](https://github.com/yaegassy/coc-blade).
+
+---
 
 [blade-formatter](https://github.com/shufo/blade-formatter) (Laravel Blade formatter) extension for [coc.nvim](https://github.com/neoclide/coc.nvim)
 

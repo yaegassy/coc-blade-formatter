@@ -25,6 +25,17 @@ export async function activate(context: ExtensionContext): Promise<void> {
   const isEnable = extensionConfig.get<boolean>('enable', true);
   if (!isEnable) return;
 
+  // End of project
+  const message = `This project is no longer maintained. Please switch to its successor, "coc-blade"`;
+  const howTo = 'Open "coc-blade" homepege?';
+
+  const option = await window.showInformationMessage(message, howTo);
+
+  if (option === howTo) {
+    commands.executeCommand('vscode.open', ['https://github.com/yaegassy/coc-blade']);
+  }
+  // /End of project
+
   const outputChannel = window.createOutputChannel('bladeFormatter');
 
   const editProvider = new BladeFormattingEditProvider(context, outputChannel);
